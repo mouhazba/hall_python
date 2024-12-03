@@ -13,16 +13,17 @@ Dans ce dossie vous trouverez des exercices, des mini projets realises en python
     - Interface utilisateur intuitive
         
     ## in pyTask_with_function
-    Vous trouverer dans ce sous dossier le projet Task fait avec des fonctions
+        La logique du projet reste intacte mais realisee avec des fonctions
 
         ### Description
-        La logique du projet reste intacte mais realisee avec des fonctions
         - les taches sont enregistrees dans une liste de dictionnaires
         
 
 
-    ## in pyTask_with_function
-    Vous trouverer dans ce sous dossier le projet Task fait avec des fonctions avec des decorateurs
+    ## in pyTask_with_decorateurs
+    Vous trouverez dans ce sous dossier le projet Task fait avec avec des decorateurs: fonctions et classe
+        ### Description
+        - certaines taches du projet seront reservees exlusivement au admin
 
-    ## in pyTask_with_function
-    Vous trouverer dans ce sous dossier le projet Task fait avec des une liste simple avec des decorateurs aussi
+    ## in pyTask_with_class
+    Vous trouverez dans ce sous dossier le projet Task fait avec des une liste simple avec des decorateurs aussi
