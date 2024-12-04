@@ -21,9 +21,13 @@ Dans ce dossie vous trouverez des exercices, des mini projets realises en python
 
 
     ## in pyTask_with_decorateurs
-    Vous trouverez dans ce sous dossier le projet Task fait avec avec des decorateurs: fonctions et classe
+        La logique du projet reste intacte mais realisee avec des fonctions
+
         ### Description
         - certaines taches du projet seront reservees exlusivement au admin
 
     ## in pyTask_with_class
-    Vous trouverez dans ce sous dossier le projet Task fait avec des une liste simple avec des decorateurs aussi
+        La logique du projet reste intacte mais realisee avec des fonctions
+        ### Description
+        - on utilisera une classe avec ses methodes pour realiser le meme projet
+        - utiliser les decorateur sur certaines methoes au besoin
