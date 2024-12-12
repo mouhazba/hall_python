@@ -31,3 +31,14 @@ Dans ce dossie vous trouverez des exercices, des mini projets realises en python
         ### Description
         - on utilisera une classe avec ses methodes pour realiser le meme projet
         - utiliser les decorateur sur certaines methoes au besoin
+
+
+
+# Goal 100 000 code lines
+dans ce projet c'est un object fixe d'attendre les 100 miles ligne de code en temps de developpeur python. 
+Ce comptage se fera sur l'ensemble des projets ou scripts realises en python contenus dans mon repertoir.
+    ## Description
+    Il sera question d'un projet qui evoluera et permettra d'appliquer les connaissances acquises en python
+    - on aura le nom du fichier ou le dossier en ligne de commande
+    - on utilisera fonction, decorateur, generateur et fichier au besoin 12/12/2024
+    - eventuellement on aura pour des connaissances plus avancees un automatisation a faire.
