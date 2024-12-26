@@ -2,7 +2,7 @@ import sys, os
 #import ast
 
 
-
+"""Cette partie est realisee avec les fonctions et .txt utilises comme fichier de stockage"""
 if len(sys.argv) != 2:
     sys.exit("Argument name file expected !")
 
