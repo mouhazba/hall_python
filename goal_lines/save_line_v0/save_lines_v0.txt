@@ -1,0 +1,1 @@
+{'total_lines': 10, 'examle1.py': 6, 'examle2.py': 4}
