@@ -205,24 +205,3 @@ def main():
 if __name__ == "__main__":
     main()
 
-
-    '''
-    {
-        total : n,
-        files : 
-        {
-            f1 : totalx,
-            f2 : totalx,
-            f3 : totalx,
-        },
-        directory:
-        {
-            d : totalx,
-            d : totalx,
-            d : totalx,
-        }
-    }
-
-
-
-    '''
