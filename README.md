@@ -38,7 +38,7 @@ This project simplifies task management by offering an intuitive user interface.
 This project lists project and files done with python and fix a goal of 100_000 lines of code to reach out like a beginner throught to get enjoy life's coding.
 
 ### **Key Features**
-- type path files or directories by commande line
+- type path files or directories by command line
 - count lines of each path
 - save data in json file
 - update
