@@ -2,12 +2,14 @@ import sys, os
 #import ast
 
 
-"""Cette partie est realisee avec les fonctions et .txt utilises comme fichier de stockage"""
+"""This part of code is done with functions .txt used as storage"""
 if len(sys.argv) != 2:
     sys.exit("Argument name file expected !")
 
+
 if not sys.argv[1].endswith('.py'):
     sys.exit("Not a Python file!")
+
 
 def valid_lines(line):
     line = line.strip()
@@ -35,17 +37,26 @@ def is_file_exist(filepath):
 
 def load_data(filepath):
     if is_file_exist(filepath):
-        with open(filepath, 'r') as f:
-            return f.read()
+        try:
+            with open(filepath, 'r') as f:
+                return f.read()
+        except Exception:
+            print('Issue to open file')
         
+    else:
+        print(f'File {filepath} not found')
+        return None
 
 def save_data(file, data):
-    with open(file, 'w') as f:
-        f.write(str(data))
+    try:
+        with open(file, 'w') as f:
+            f.write(str(data))
+    except FileNotFoundError:
+        print(f'File {file} not found')
 
 
 def is_data_in_file(data):
-    data_eval  = eval(data)
+    data_eval  = eval(data) # eval data to a dictionary
     keys_data = [key for key in data_eval.keys()]
     new_data = sys.argv[1]
     return new_data in keys_data
