@@ -34,6 +34,15 @@ This project simplifies task management by offering an intuitive user interface.
 
 ---
 
+## **Goal 100_000 lines of code**
+This project lists project and files done with python and fix a goal of 100_000 lines of code to reach out like a beginner throught to get enjoy life's coding.
+
+### **Key Features**
+- type path files or directories by commande line
+- count lines of each path
+- save data in json file
+- update
+
 ### **Installation**
 
 To use the project, follow these steps:
@@ -58,11 +67,14 @@ To use the project, follow these steps:
 ```
 hall_python/
 │
-├── pyTask_with_function/      # Task project using functions
-├── pyTask_with_decorator/     # Task project using decorators
-├── pyTask_with_class/         # Task project using classes
-├── gal_lines/                 # Contains additional code or tools
-└── README.md                  # Documentation for the repository
+├── pyTask/      # Task projects directoiry
+|   ├── pyTask_with_function/      # Task project using functions
+|   ├── pyTask_with_decorator/     # Task project using decorators
+|   ├── pyTask_with_class/         # Task project using classes
+├── goal_lines/                    # Contains additional code or tools
+|   ├── save_lines_vo/             # contains version v0
+|   ├── save_lines_v1/             # contains version v1
+└── README.md                      # Documentation for the repository
 ```
 
 ---
@@ -91,4 +103,3 @@ This project is licensed under the MIT License. See the `LICENSE` file for detai
 ---
 
     
-
