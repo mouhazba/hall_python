@@ -225,3 +225,8 @@ def main():
 if __name__ == "__main__":
     main()
 
+
+# defi verifier que tout fichier dans un dossier n est pas deja traite
+# gerer le cas ou un mix de dossier et file fourni
+# gerer le cas ou un plusieurs dossier sont fournis
+# et si le meme fichier est fourni deux fois
