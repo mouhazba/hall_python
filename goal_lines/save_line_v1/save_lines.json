@@ -1,12 +1,10 @@
 {
-    "total_lines": 460,
+    "total_lines": 88,
     "files": {
-        "test1.py": 4,
-        "test2.py": 4,
-        "test3.py": 6
+        "test1.py": 3,
+        "test2.py": 4
     },
     "directory": {
-        "../save_line_v0/": 81,
-        "../save_line_v1/": 365
+        "../save_line_v0/": 81
     }
 }
