@@ -43,7 +43,7 @@ This project lists project and files done with python and fix a goal of 100_000 
 - save data in json file
 - update
 
-### **Installation**
+### **Quick Start**
 
 To use the project, follow these steps:
 
