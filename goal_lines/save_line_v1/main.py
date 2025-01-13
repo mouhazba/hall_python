@@ -3,8 +3,11 @@ import os
 import sys
 
 
-def is_python_file(files):
-    return all(f.endswith('.py') and os.path.isfile(f) for f in files)
+def is_python_file(file):
+    if os.path.isfile(file):
+        return file.endswith('.py')
+    return False
+
 
 
 def is_valid_line(line):
@@ -16,23 +19,25 @@ def is_valid_line(line):
 
 def count_lines_in_file(path):
     total_lines = 0
+    #with files
     if os.path.isfile(path):
         with open(path, 'r') as f:
             while line:= f.readline():
                 if is_valid_line(line):
                     total_lines += 1
 
+    #with directories
     elif os.path.isdir(path):
-        """Parcourt un dossier et compte les lignes dans tous les fichiers Python."""
-        ignored_dirs = {'.git', '__pycache__'}  # Liste des répertoires à ignorer
+        """count lines of Python files  recursively in a folder."""
+        ignored_dirs = {'.git', '__pycache__'}
         for root, dirs, files in os.walk(path):
             for pathfile in files:
-                # Supprimer les répertoires à ignorer de la liste des sous-dossiers
+                # list of files to ignore
                 dirs[:] = [d for d in dirs if d not in ignored_dirs]
                 filepath = os.path.join(root, pathfile)
-                if is_python_file([filepath]):
+                if is_python_file(filepath):
                     if is_valid_line(filepath):
-                        total_lines += count_lines_in_file(filepath) # appel recursif pour ne pas repeter le 1er bloc if
+                        total_lines += count_lines_in_file(filepath) #count_lines_in_file() called
     return total_lines
 
 
@@ -41,15 +46,15 @@ def inizialize_data(filepath):
     data['total_lines'] = 0
     data['files'] = {}
     data['directory'] = {}
-
     
+    #with files
     if os.path.isfile(filepath):
         new_lines = count_lines_in_file(filepath)
         data['total_lines'] += new_lines
         data['files'][filepath] = new_lines
         
+    #with directories
     elif os.path.isdir(filepath):
-        #new_lines = count_lines_in_directory(filepath)
         new_lines = count_lines_in_file(filepath)
         data['total_lines'] += new_lines
         data['directory'][filepath] = new_lines
@@ -58,176 +63,119 @@ def inizialize_data(filepath):
 
 
 def save_data(filename, data):
+    
     try:
         with open(filename, 'w') as f:
             json.dump(data, f, indent=4)
-        print(f"Les données ont été sauvegardées dans '{filename}'.")
     except FileNotFoundError:
         print('File {filename} not found')
 
 
 def load_data(filepath):
-    # Vérifier si le fichier existe
     if not os.path.exists(filepath):
         return None
 
     try:
-        # Charger le contenu du fichier JSON
         with open(filepath, 'r') as file:
-            # Vérifier si le fichier est vide
+            # check if file is empty
             if os.path.getsize(filepath) == 0:
-                print(f"Le fichier '{filepath}' est vide.")
+                print(f"{filepath} is empty.")
                 return None
             data = json.load(file)
             return data
     except json.JSONDecodeError:
-        print(f"Le fichier '{filepath}' contient des données JSON invalides.")
+        print(f"The file {filepath} contains invalid format JSON's data.")
         return None
 
 
 def is_new_data_exist(data, new_file):
+    #use any() instead
     if new_file in data.get('files', {}) or new_file in data.get('directory', {}):
         return True
     else:
         False
 
 def is_data_change(data, new_path):
+    # check in files
     if os.path.isfile(new_path):
         new_data_lines = count_lines_in_file(new_path)
         old_data_lines = data['files'][new_path]
 
+    # check in directories
     elif os.path.isdir(new_path):
         new_data_lines = count_lines_in_file(new_path)
         old_data_lines = data['directory'][new_path]
+        
     return old_data_lines != new_data_lines
 
 
-def update_data(filename, new_path):
-    if os.path.isfile(new_path):
-        new_data_lines = count_lines_in_file(new_path)
-        data = load_data(filename)
-        old_data_lines = data['files'][new_path]
-        data['total_lines'] += new_data_lines - old_data_lines
-        data['files'][new_path] = new_data_lines
-
-    elif os.path.isdir(new_path):
-        new_data_lines = count_lines_in_file(new_path)
-        data = load_data(filename)
-        old_data_lines = data['directory'][new_path]
-        data['total_lines'] += new_data_lines - old_data_lines
-        data['directory'][new_path] = new_data_lines
-    try:
-        with open(filename, 'w') as f:
-            json.dump(data, f, indent=4)
-        print(f"Les données ont été bien mises a jour dans '{filename}'.")
-    except FileNotFoundError:
-        print(f'File {filename} not found')
-
 
 def add_new_data_in_file(filename, new_path):
-    if os.path.isfile(new_path):
-        new_data_lines = count_lines_in_file(new_path)
-        data = load_data(filename)
-        data['total_lines'] += new_data_lines
-        data['files'][new_path] = new_data_lines
-    
-    elif os.path.isdir(new_path):
-        new_data_lines = count_lines_in_file(new_path)
-        data = load_data(filename)
-        data['total_lines'] += new_data_lines
-        data['directory'][new_path] = new_data_lines
-
-    try:
-        with open(filename, 'w') as f:
-            json.dump(data, f, indent=4)
-        print(f"{new_path} a bien été ajoute dans '{filename}'.")
-    except FileNotFoundError:
-        print('File {filepath} not found')
-
-def global_check_and_save_data(filename,paths):
     data_in_file = load_data(filename)
-    if len(paths) == 1:  # Si un seul élément est fourni
+    new_data_lines = count_lines_in_file(new_path)
+    msg = ''
+    if data_in_file != None:
+        #update file
+        if is_new_data_exist(data_in_file, new_path):
+            if is_data_change(data_in_file, new_path): 
+                if os.path.isfile(new_path):
+                    old_data_lines = data_in_file['files'][new_path]
+                    data_in_file['total_lines'] += new_data_lines - old_data_lines
+                    data_in_file['files'][new_path] = new_data_lines
 
-        path = paths[0]
-        if is_python_file([path]):
-    
-            if data_in_file != None:
-                if is_new_data_exist(data_in_file, path):
-                    if is_data_change(data_in_file, path):
-                        update_data(filename, path)
-                    else:
-                        print('Aucun change note')
-                else:
-                    add_new_data_in_file(filename, path)
+                elif os.path.isdir(new_path):
+                    old_data_lines = data_in_file['directory'][new_path]
+                    data_in_file['total_lines'] += new_data_lines - old_data_lines
+                    data_in_file['directory'][new_path] = new_data_lines
+                save_data(filename, data_in_file)
+                msg = f"data updated in  {filename}"
             else:
-                data_iniatial = inizialize_data(path)
-                save_data(filename, data_iniatial)
-                print('Data initialized')
-                
-
-        elif os.path.isdir(path):
-            if data_in_file != None:
-                if is_new_data_exist(data_in_file, path):
-                    if is_data_change(data_in_file, path):
-                        update_data(filename, path)
-
-                    else:
-                        print('Aucun changement')
-                else:
-                    add_new_data_in_file(filename, path)
-                    
-                    
-            else:
-                data_iniatial = inizialize_data(path)
-                save_data(filename, data_iniatial)
-                print('Data initialized')
+                msg = f"No change"
 
         else:
-            print(f"'{path}' is not a Python file or a directory.")
+            #add new file
+            if os.path.isfile(new_path):
+                data_in_file['total_lines'] += new_data_lines
+                data_in_file['files'][new_path] = new_data_lines
 
+            elif os.path.isdir(new_path):
+                data_in_file['total_lines'] += new_data_lines
+                data_in_file['directory'][new_path] = new_data_lines
+            save_data(filename, data_in_file)
+            msg = f"data saved in file {filename}"
+
+        return msg
 
     else:
-        # Si plusieurs chemins sont fournis, vérifier qu'ils sont tous des fichiers Python
-        if is_python_file(paths):
-            if data_in_file != None:
-                is_something_change = False
-                is_something_added = False
-                for f in paths:
-                    if is_new_data_exist(data_in_file, f):
-                        if is_data_change(data_in_file, f):
-                            update_data(filename, f)
-                            is_something_change = True
-                    
-                    else:
-                        add_new_data_in_file(filename, f)
-                        is_something_added = True
-                if not is_something_change and not is_something_added:
-                    print('Aucun changement note')
+        data_inialized = inizialize_data(new_path)
+        save_data(filename, data_inialized)
+        return f"data saved in  {filename}"     
 
-            else:
-                data_iniatial = inizialize_data(paths[0])
-                save_data(filename, data_iniatial)
-                for f in paths[1:]:
-                    add_new_data_in_file(filename, f)
-        else:
-            print("Not all provided files are Python files!")
+def check_valid_args(paths):
+    return all((is_python_file(path) or os.path.isdir(path) for path in paths))
 
-def main():
-    if len(sys.argv) < 2:
+
+def main(args):
+    if len(args) < 1:
         sys.exit('Too few arguments!')
 
     filename = 'save_lines.json'
-
-    paths = sys.argv[1:]
-    if len(paths) == 1:
-        # si fichier faite le necesssaire
-        pass
+    data_in_file = load_data(filename)
+    if data_in_file != None:
+        for f in args:
+            msg = add_new_data_in_file(filename, f)
+        print(msg)
+    
     else:
-        # plusieurs f ou d
-        pass
-    global_check_and_save_data(filename, paths)    
-  
+        if not check_valid_args(args):
+            print("Not all provided files are Python files!")
+            sys.exit(1)
+        for f in args:
+            msg = add_new_data_in_file(filename, f)
+        print(f"Inialization: {msg}")
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv[1:])
+
+
 
