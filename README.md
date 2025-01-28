@@ -33,6 +33,20 @@ This project simplifies task management by offering an intuitive user interface.
      - Uses decorators for certain methods as needed.
 
 ---
+## **Check Password Project**
+This project allows users to check if their passwords have been exposed in known data breaches by using the Pwned Passwords API.
+
+### **Key Features**
+
+-Validates password security against a database of leaked passwords.
+
+-Uses SHA-1 hashing to maintain password confidentiality.
+
+-Efficiently queries the API using the first 5 characters of the hashed password.
+
+-Simple command-line interface for quick checks.
+
+---
 
 ## **Goal 100_000 lines of code**
 This project lists project and files done with python and fix a goal of 100_000 lines of code to reach out like a beginner throught to get enjoy life's coding.
@@ -42,6 +56,7 @@ This project lists project and files done with python and fix a goal of 100_000 
 - count lines of each path
 - save data in json file
 - update
+---
 
 ### **Quick Start**
 
@@ -67,14 +82,15 @@ To use the project, follow these steps:
 ```
 hall_python/
 │
-├── pyTask/      # Task projects directoiry
-|   ├── pyTask_with_function/      # Task project using functions
-|   ├── pyTask_with_decorator/     # Task project using decorators
-|   ├── pyTask_with_class/         # Task project using classes
-├── goal_lines/                    # Contains additional code or tools
-|   ├── save_lines_vo/             # contains version v0
-|   ├── save_lines_v1/             # contains version v1
-└── README.md                      # Documentation for the repository
+├── pyTask/                      # Task projects directory
+|   ├── pyTask_with_function/    # Task project using functions
+|   ├── pyTask_with_decorator/   # Task project using decorators
+|   ├── pyTask_with_class/       # Task project using classes
+├── check_password/              # Check password security project
+├── goal_lines/                  # Contains additional code or tools
+|   ├── save_lines_vo/           # Contains version v0
+|   ├── save_lines_v1/           # Contains version v1
+└── README.md                    # Documentation for the repository
 ```
 
 ---
