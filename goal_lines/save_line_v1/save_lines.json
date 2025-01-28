@@ -1,10 +1,7 @@
 {
-    "total_lines": 88,
-    "files": {
-        "test1.py": 3,
-        "test2.py": 4
-    },
+    "total_lines": 190,
+    "files": {},
     "directory": {
-        "../save_line_v0/": 81
+        "/home/mouhazba/Documents/hall_python/pyTask": 190
     }
 }
