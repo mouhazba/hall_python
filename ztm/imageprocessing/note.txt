@@ -1,0 +1,5 @@
+unsplash.com pour des photos gratuites
+opencv.org 
+
+# pour toute librairie python nous devons voir son etat sur github pour savoir"
+# si elle est bien suivie , partagee et soutenue
