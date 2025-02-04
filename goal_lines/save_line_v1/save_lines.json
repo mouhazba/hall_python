@@ -1,8 +1,10 @@
 {
-    "total_lines": 257,
+    "total_lines": 1576,
     "files": {},
     "directory": {
         "/home/mouhazba/Documents/hall_python/pyTask": 190,
-        "/home/mouhazba/Documents/hall_python/ztm": 67
+        "/home/mouhazba/Documents/hall_python/ztm": 67,
+        "/home/mouhazba/Documents/hall_python/goal_lines": 613,
+        "/home/mouhazba/Documents/grow/web/folio_with_flask": 706
     }
 }
