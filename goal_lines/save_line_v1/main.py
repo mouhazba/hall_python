@@ -13,7 +13,7 @@ def is_python_or_html_file(file):
     Returns:
         bool: True if the file ends with .py, otherwise False.
     """
-    return any([(file.endswith(".py") or file.endswith(".html"))])
+    return any([(file.endswith(".py") or file.endswith(".html") or file.endswith(".md") )])
 
 
 def is_valid_line(line):
@@ -27,7 +27,12 @@ def is_valid_line(line):
         bool: True if the line is valid, otherwise False.
     """
     line = line.strip()
-    return not any([line.startswith("#") or line.startswith("<!--") or line.startswith(("'", '"')) or not line])
+    line = line.strip()
+    return not any([
+        line.startswith("#"), line.startswith("-"), line.startswith("<!--"),
+        line.startswith("'''"), line.startswith('"""'), line.startswith(">"),
+        line.startswith("*"), not line
+        ])
 
 
 def count_lines_in_file(path):
@@ -41,7 +46,7 @@ def count_lines_in_file(path):
         int: Total number of valid lines.
     """
     total_lines = 0
-
+    ignored_dirs = {".git", "__pycache__"}
     if os.path.isfile(path):
         with open(path, "r") as f:
             while line := f.readline():
@@ -49,7 +54,6 @@ def count_lines_in_file(path):
                     total_lines += 1
 
     elif os.path.isdir(path):
-        ignored_dirs = {".git", "__pycache__"}
         for root, dirs, files in os.walk(path):
             dirs[:] = [d for d in dirs if d not in ignored_dirs]
             for file in files:
