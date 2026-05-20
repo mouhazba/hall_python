@@ -13,7 +13,7 @@ def is_python_or_html_file(file):
     Returns:
         bool: True if the file ends with .py, otherwise False.
     """
-    return any([(file.endswith(".py") or file.endswith(".html") or file.endswith(".md") )])
+    return any([file.endswith(".py") or file.endswith(".html") or file.endswith(".md")])
 
 
 def is_valid_line(line):
@@ -28,11 +28,18 @@ def is_valid_line(line):
     """
     line = line.strip()
     line = line.strip()
-    return not any([
-        line.startswith("#"), line.startswith("-"), line.startswith("<!--"),
-        line.startswith("'''"), line.startswith('"""'), line.startswith(">"),
-        line.startswith("*"), not line
-        ])
+    return not any(
+        [
+            line.startswith("#"),
+            line.startswith("-"),
+            line.startswith("<!--"),
+            line.startswith("'''"),
+            line.startswith('"""'),
+            line.startswith(">"),
+            line.startswith("*"),
+            not line,
+        ]
+    )
 
 
 def count_lines_in_file(path):
@@ -253,7 +260,6 @@ def main(args):
         for f in args:
             msg = add_new_data_in_file(filename, f)
         print(f"Initialization: {msg}")
-
 
 
 if __name__ == "__main__":

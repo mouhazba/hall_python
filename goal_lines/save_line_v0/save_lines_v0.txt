@@ -1,1 +1,1 @@
-{'total_lines': 11, 'examle1.py': 7, 'examle2.py': 4}
+{'total_lines': 7, 'examle1.py': 3, 'examle2.py': 4}
